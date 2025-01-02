@@ -1,0 +1,40 @@
+require("rainymatch")
+
+require('packer').startup(function(use)
+    use 'wbthomason/packer.nvim'
+    
+    -- Treesitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    
+    -- Catppuccin theme
+    use { "catppuccin/nvim", as = "catppuccin" }
+end)
+
+-- Configure nvim-treesitter
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { "python" },
+    highlight = {
+        enable = true,
+    },
+}
+
+-- Configure Catppuccin theme
+require("catppuccin").setup({
+    integrations = {
+        treesitter = true,
+    },
+    custom_highlights = {},
+    styles = {
+        comments = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+    },
+})
+
+-- Set the color scheme
+vim.cmd.colorscheme "catppuccin-mocha"
